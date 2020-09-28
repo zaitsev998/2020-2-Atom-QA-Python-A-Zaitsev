@@ -7,15 +7,17 @@ class TestList:
 
     LIST_LENGTH = 5
 
+    @staticmethod
     @pytest.mark.parametrize(('lst', 'elem', 'result'),
                              (([1, 2, 3, 4, 5], 6, 0),
                               ([1, 2, 3, 5, 3], 3, 2),
                               (['1', '2', '3'], '1', 1)))
-    def test_count(self, lst, elem, result):
+    def test_count(lst, elem, result):
         assert lst.count(elem) == result
 
-    def test_list_is_mutable(self):
-        list1 = [i for i in range(self.LIST_LENGTH)]
+    @staticmethod
+    def test_list_is_mutable():
+        list1 = [1, 2, 3, 4, 5]
         list2 = list1
         list1[0] = 6
         assert list1 is list2
@@ -23,13 +25,14 @@ class TestList:
     def test_insert(self):
         index = randint(0, self.LIST_LENGTH - 1)
         elem = randint(0, 100)
-        list1 = [i for i in range(self.LIST_LENGTH)]
+        list1 = [1, 2, 3, 4, 5]
         list2 = list1[:index] + [elem] + list1[index:]
         list1.insert(index, elem)
         assert list1 == list2
 
-    def test_clear(self):
-        lst = [i for i in range(self.LIST_LENGTH)]
+    @staticmethod
+    def test_clear():
+        lst = [1, 2, 3, 4, 5]
         lst.clear()
         assert lst == []
 

@@ -3,6 +3,9 @@ import pytest
 
 class TestSet:
 
+    first_set = {1, 3, 5, 7, 10}
+    second_set = {2, 3, 5, 8, 12}
+
     def sets_definition(self):
         self.first_set = {1, 3, 5, 7, 10}
         self.second_set = {2, 3, 5, 8, 12}
@@ -23,9 +26,10 @@ class TestSet:
         self.sets_definition()
         assert self.first_set.issubset(self.second_set) == (self.first_set <= self.second_set)
 
+    @staticmethod
     @pytest.mark.parametrize(('init_set', 'item', 'result'),
                              (({'first', 'second'}, 'second', {'first'}),
                               ({'first', 'second'}, 'third', {'first', 'second'})))
-    def test_discard(self, init_set, item, result):
+    def test_discard(init_set, item, result):
         init_set.discard(item)
         assert init_set == result

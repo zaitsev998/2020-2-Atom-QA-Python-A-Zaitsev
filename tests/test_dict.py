@@ -23,7 +23,8 @@ class TestDict:
         dct.clear()
         assert dct == {}
 
-    def test_keys_is_immutable(self):
+    @staticmethod
+    def test_keys_is_immutable():
         dictionary = {}
         with pytest.raises(TypeError):
             assert dictionary[[1, 2, 3]]
