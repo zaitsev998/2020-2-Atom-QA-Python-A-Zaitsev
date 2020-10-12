@@ -1,9 +1,11 @@
 from random import randint
-
+from settings import EMAIL, PASSWORD
 import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
+
+from ui.pages.campaigns_page import CampaignsPage
 from ui.pages.base_page import BasePage
 from ui.pages.welcome_page import WelcomePage
 from ui.pages.main_page import MainPage
@@ -34,6 +36,11 @@ def segment_page(driver):
     return SegmentPage(driver=driver)
 
 
+@pytest.fixture
+def campaigns_page(driver):
+    return CampaignsPage(driver=driver)
+
+
 @pytest.fixture(scope='function')
 def driver(config):
     selenoid = config['selenoid']
@@ -59,15 +66,13 @@ def driver(config):
 
 @pytest.fixture(scope='function')
 def authorized_driver(welcome_page):
-    email = 'test-mail-artz@yandex.ru'
-    password = 'test_mail_12345'
     welcome_page.click(welcome_page.locators.LOGIN_BUTTON_FIRST)
     email_field = welcome_page.find(welcome_page.locators.EMAIL_FIELD)
     email_field.clear()
-    email_field.send_keys(email)
+    email_field.send_keys(EMAIL)
     password_field = welcome_page.find(welcome_page.locators.PASSWORD_FIELD)
     password_field.clear()
-    password_field.send_keys(password)
+    password_field.send_keys(PASSWORD)
     welcome_page.click(welcome_page.locators.LOGIN_BUTTON_SECOND)
     yield welcome_page
 
@@ -94,6 +99,6 @@ def go_to_segments_creating(segment_page):
     segment_page.click(segment_page.locators.AUDIENCES)
     segments_count = segment_page.find(segment_page.locators.SEGMENTS_COUNT)
     if segments_count.text == '0':
-        segment_page.click(segment_page.locators.CREATE_SEGMENT_HREF)
+        segment_page.click(segment_page.locators.CREATE_SEGMENT_LINK)
     else:
         segment_page.click(segment_page.locators.CREATE_SEGMENT_BUTTON)
