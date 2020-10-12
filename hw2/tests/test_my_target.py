@@ -12,7 +12,6 @@ from base import BaseCase
 class TestMyTarget(BaseCase):
 
     def test_authorization(self, authorized_driver):
-        print(self.driver.page_source)
         username = self.main_page.find(self.main_page.locators.USERNAME)
         assert username.get_attribute('title') == EMAIL
 

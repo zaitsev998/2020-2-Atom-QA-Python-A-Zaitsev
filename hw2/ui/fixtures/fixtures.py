@@ -4,7 +4,7 @@ import pytest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from webdriver_manager.firefox import GeckoDriverManager
-
+from selenium.webdriver import ChromeOptions
 from ui.pages.campaigns_page import CampaignsPage
 from ui.pages.base_page import BasePage
 from ui.pages.welcome_page import WelcomePage
@@ -57,7 +57,10 @@ def driver(config):
         else:
             raise UnsupportedBrowserException(f"Unsupported browser {browser}")
     else:
-        pass
+        options = ChromeOptions()
+        driver = webdriver.Remote(command_executor=f"http://{selenoid}/wd/hub",
+                                  options=options,
+                                  desired_capabilities={'acceptInsecureCerts': True})
     driver.get(url=url)
     driver.maximize_window()
     yield driver
