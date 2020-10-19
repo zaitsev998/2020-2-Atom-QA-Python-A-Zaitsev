@@ -1,10 +1,11 @@
+import pytest
 from ui.fixtures.fixtures import *
 
 
 def pytest_addoption(parser):
     parser.addoption('--selenoid', default=None)
     parser.addoption('--url', default='https://target.my.com/')
-    parser.addoption('--browser_ver', default='80.0.3987.106')
+    parser.addoption('--browser_ver')
     parser.addoption('--browser', default='chrome')
 
 

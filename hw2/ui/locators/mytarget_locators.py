@@ -19,6 +19,7 @@ class MainPageLocators(BasePageLocators):
 
 class SegmentPageLocators(BasePageLocators):
     ADDING_SEGMENT_SOURCE = (By.CLASS_NAME, "adding-segments-source__expand js-expanded")
+    APPS_AND_GAMES = (By.XPATH, '//div[contains(text(), "Приложения и игры в соцсетях")]')
     PAYING_CHECKBOX = (By.ID, 'view-374-pay')
     ADDING_CHECKBOX = (By.XPATH, '//input[contains(@class, "adding-segments-source__checkbox")]')
     ADD_SEGMENT_BUTTON = (By.XPATH, '//div[@class="button__text" and contains(text(), "Добавить сегмент")]')

@@ -26,16 +26,15 @@ class TestMyTarget(BaseCase):
         self.welcome_page.click(self.welcome_page.locators.LOGIN_BUTTON_SECOND)
         assert 'Invalid login or password' in self.driver.page_source
 
-    def test_segment_creating(self, segment_creating):
-        assert self.segment_page.find(self.segment_page.locators.segment_locator(segment_name=segment_creating))
+    def test_segment_creating(self, authorized_driver):
+        segment_name = self.segment_page.create_segment()
+        self.segment_page.find(self.segment_page.locators.segment_locator(segment_name=segment_name))
+        self.segment_page.delete_segment(segment_name)
 
-    def test_segment_deleting(self, segment_creating):
-        row = self.segment_page.find(self.segment_page.locators.segment_deleting_row(segment_name=segment_creating))
-        id = row.get_attribute("data-test").split()[0].split("-")[1]
-        self.segment_page.click(self.segment_page.locators.segment_deleting_button(id=id))
-        self.segment_page.click(self.segment_page.locators.DELETE_BUTTON)
-        self.segment_page.driver.refresh()
-        assert segment_creating not in self.segment_page.driver.page_source
+    def test_segment_deleting(self, authorized_driver):
+        segment_name = self.segment_page.create_segment()
+        self.segment_page.delete_segment(segment_name)
+        assert segment_name not in self.segment_page.driver.page_source
 
     @pytest.mark.skip
     def test_campaign_creating(self, authorized_driver):
