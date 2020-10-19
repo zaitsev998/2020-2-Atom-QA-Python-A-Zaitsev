@@ -4,7 +4,7 @@ from urllib.parse import urljoin
 import requests
 from requests.cookies import cookiejar_from_dict
 
-from hw3.settings import EMAIL, PASSWORD
+from settings import EMAIL, PASSWORD
 
 
 class ResponseStatusCodeException(Exception):
@@ -93,7 +93,7 @@ class MyTargetClient:
         data = json.dumps(request_payload)
         response = self._request('POST', location, headers=headers, data=data, json=False)
         segment_id = response.text.split(',')[1].split(': ')[-1]
-        return segment_id
+        return int(segment_id)
 
     def delete_segment(self, segment_id):
         deleting_location = f'/api/v2/remarketing/segments/{segment_id}.json'
@@ -106,7 +106,22 @@ class MyTargetClient:
         }
         self._request('DELETE', deleting_location, status_code=204, headers=headers, json=False)
 
+    def get_all_segments_ids(self):
+        location = 'api/v2/remarketing/segments.json?fields=relations__object_type,relations__object_id,' \
+                   'relations__params,relations_count,id,name,pass_condition,created,campaign_ids,users,' \
+                   'flags&limit=500&_=1603102403184'
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/86.0.4240.75 Safari/537.36',
+            'Referer': 'https://target.my.com/segments/segments_list',
+            'X-Requested-With': 'XMLHttpRequest'
+        }
+        response = self._request('GET', location, headers=headers)
+        segment_ids = [segment['id'] for segment in response['items']]
+        return segment_ids
+
 
 if __name__ == '__main__':
     mtc = MyTargetClient()
-    mtc.create_segment()
+    # mtc.create_segment()
+    mtc.get_all_segments_ids()
