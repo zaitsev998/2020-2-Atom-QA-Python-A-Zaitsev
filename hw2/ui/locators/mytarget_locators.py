@@ -15,6 +15,9 @@ class WelcomePageLocators(BasePageLocators):
 
 class MainPageLocators(BasePageLocators):
     USERNAME = (By.XPATH, '//div[contains(@class, "right-module-userNameWrap")]')
+    CREATE_CAMPAIGN_LINK = (By.XPATH, '//a[@href="campaign/new/"]')
+    CREATE_CAMPAIGN_BUTTON = (By.XPATH, '//div[contains(@class, "button-module-textWrapper") and '
+                                        'contains(text(), "Создать кампанию")]')
 
 
 class SegmentPageLocators(BasePageLocators):
@@ -47,7 +50,6 @@ class SegmentPageLocators(BasePageLocators):
 
 
 class CampaignsPageLocators(BasePageLocators):
-    CREATE_CAMPAIGN_LINK = (By.XPATH, '//a[@href="campaign/new/"]')
     CREATE_CAMPAIGN_BUTTON = (By.XPATH, '//div[contains(@class, "button-module-textWrapper") and '
                                         'contains(text(), "Создать кампанию")]')
     TRAFFIC_BUTTON = (By.XPATH, '//div[contains(text(), "Трафик")]')
