@@ -1,0 +1,20 @@
+[Connection: close]
+[Host: 192.168.0.105:2222]
+/shareware
+
+[Connection: close]
+[Host: 192.168.0.105:2222]
+[Authorization: Basic dGVzdF91c2VyOjEyMzQ1]
+/profile
+
+
+[Connection: close]
+[Host: 192.168.0.105:2222]
+[Authorization: Basic dGVzdF91c2VyOjEyMzQ1]
+/photo
+
+
+[Connection: close]
+[Host: 192.168.0.105:2222]
+[Authorization: Basic dGVzdF91c2VyOjEyMzQ1]
+/
