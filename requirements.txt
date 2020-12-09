@@ -43,3 +43,9 @@ urllib3==1.25.10
 webdriver-manager==3.2.2
 Werkzeug==1.0.1
 wrapt==1.12.1
+
+Flask~=1.1.2
+Werkzeug~=1.0.1
+locust~=1.4.1
+Faker~=4.16.0
+paramiko~=2.7.2

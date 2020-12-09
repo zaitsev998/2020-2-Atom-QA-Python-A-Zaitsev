@@ -1,0 +1,16 @@
+overload:
+  enabled: true
+  token_file: /var/loadtest/token.txt
+  package: yandextank.plugins.DataUploader
+  job_name: test_const_zaitsev
+  job_dsc: test_const_dsc
+phantom:
+  address: 192.168.0.106:2222
+  ammofile: /var/loadtest/ammo.txt
+  load_profile:
+    load_type: rps
+    schedule: const(2, 30)
+telegraf:
+  enabled: false
+console:
+  enabled: false
